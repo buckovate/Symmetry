@@ -13,15 +13,15 @@ def bwsymmetryindexvertical(filename):
 
 # convert it to ndarray of 512x512 pixels
     im = np.array(img_grey)
-    print(im.shape)
+    # print(im.shape)
 
-# split it into two halves in the middle - horizontal
+# split it into two halves in the middle - vertical
     lefthalf = im[:, 0:256]
     righthalf = im[:,256:512]
     rows = lefthalf.shape[0]
     cols = lefthalf.shape[1]
-    print(rows)
-    print(cols)
+    # print(rows)
+    # print(cols)
 
     pil_img = Image.fromarray(lefthalf)
     pil_img.save('output/lefthalf.jpg')
@@ -31,10 +31,10 @@ def bwsymmetryindexvertical(filename):
 # split it into two halves in the middle - vertical
 
 # flip it
-    pil_img = Image.fromarray(righthalf)
-    im_mirror = ImageOps.mirror(pil_img)
-    im_mirror.save('output/flipped.jpg')
-    righthalf = np.array(im_mirror)
+#     pil_img = Image.fromarray(righthalf)
+#     im_mirror = ImageOps.mirror(pil_img)
+#     im_mirror.save('output/flipped.jpg')
+    righthalf = np.fliplr(righthalf)
 
 
 # compare it
@@ -44,8 +44,10 @@ def bwsymmetryindexvertical(filename):
             if (righthalf[k, j] == lefthalf[k, j]):
                 same = same + 1
 
-    print(same)
-    print (same/((cols*rows)))
+    # print(same)
+    # print (same/((cols*rows)))
+    return same/((cols*rows))
+
 
 
 
