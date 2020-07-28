@@ -45,7 +45,6 @@ def bwsymmetryindexhorizontal(filename):
             if (righthalf[k, j] == lefthalf[k, j]):
                 same = same + 1
 
-    print(same)
     # print(filename)
     # print (same/((512*512)/2))
     return same/((cols*rows))
