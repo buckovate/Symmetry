@@ -9,42 +9,36 @@ def coloursymmetryindexhorizontal(filename):
 
 # convert it to ndarray of 512x512 pixels
     im = np.array(im)
+    print(im.shape)
     # print(im.shape)
+
 
 # split it into two halves in the middle - horizontal
     lefthalf = im[0:256, :]
     righthalf = im[256:512, :]
     rows = lefthalf.shape[0]
     cols = lefthalf.shape[1]
+
     # print(rows)
     # print(cols)
 
-    pil_img = Image.fromarray(lefthalf)
-    pil_img.save('output/lefthalf.jpg')
-
-    plt.imshow(lefthalf)
 
 # split it into two halves in the middle - vertical
 
 # flip it
+    righthalf = np.flipud(righthalf)
     pil_img = Image.fromarray(righthalf)
-    im_mirror = ImageOps.mirror(pil_img)
-    im_mirror.save('output/flipped.jpg')
-    righthalf = np.array(im_mirror)
-
+    pil_img.save('output/flipped.jpg')
 
 # compare it
     same = 0
     for j in range(0, cols - 1):
         for k in range(0, rows - 1):
-            if (righthalf[k, j] == lefthalf[k, j]):
+            if (righthalf[k, j, 0] == lefthalf[k, j, 0] & righthalf[k, j, 1] == lefthalf[k, j, 1] & righthalf[k, j, 2] ==
+                    lefthalf[k, j, 2]):
                 same = same + 1
 
-    # print(same)
-    print(filename)
-    print (same/((cols*rows)))
-
-
+    return same/((cols*rows))
 
 
 
