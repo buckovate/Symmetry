@@ -1,8 +1,9 @@
 import numpy as np
 from PIL import Image, ImageOps
 import matplotlib.pyplot as plt
+import math
 
-def coloursymmetryindexdiagonal(filename):
+def coloursymmetryindexdiagonaltol(filename):
 # read in image
 
     im = Image.open(filename)
@@ -42,7 +43,7 @@ def coloursymmetryindexdiagonal(filename):
     comparison = 0
     for y in range(1, 512):
         for x in range(1, y):
-            if (im[y, x, 0] == im[-x, -y, 0] & im[y, x, 1] == im[-x, -y, 1] & im[y, x, 2] == im[-x, -y, 2]):
+            if math.isclose(im[y, x, 0], im[-x, -y, 0]) & math.isclose(im[y, x, 1], im[-x, -y, 1]) & math.isclose(im[y, x, 2], im[-x, -y, 2]):
                 same = same + 1
             comparison = comparison + 1
 
@@ -51,7 +52,7 @@ def coloursymmetryindexdiagonal(filename):
     # print (same/((cols*rows)))
     return (same/(comparison))
 
-def coloursymmetryindexdiagonal2(filename):
+def coloursymmetryindexdiagonal2tol(filename):
 # read in image
 
     im = Image.open(filename)
@@ -93,7 +94,7 @@ def coloursymmetryindexdiagonal2(filename):
     comparison1 = 0
     for y in range(1, 512):
         for x in range(1, y):
-            if (im[y, x, 0] == im[x, y, 0] & im[y, x, 1] == im[x, y, 1] & im[y, x, 2] == im[x, y, 2]):
+            if math.isclose(im[y, x, 0], im[x, y, 0]) & math.isclose(im[y, x, 1],im[x, y, 1]) & math.isclose(im[y, x, 2], im[x, y, 2]):
                 same1 = same1 + 1
             comparison1 = comparison1 + 1
 

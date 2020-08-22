@@ -44,7 +44,7 @@ def bwsymmetryindexdiagonal2(filename):
     comparison = 0
     for y in range(1, 512):
         for x in range(1, y):
-            if (im[y, x] == im[-x, -y]):
+            if (im[y, x] == im[-y, -x]):
                 same = same + 1
             comparison = comparison + 1
 
